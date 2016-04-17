@@ -148,7 +148,7 @@ function showList(key){
       // li.append($mapdiv);
       li.append('<br>');
       if(laund.lat && laund.lng){
-        li.append('<a target="_blank" href="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
+        li.append('<a target="_blank" href="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=loc:' + laund.lat + ',' + laund.lng + '&output=embed&t=m&z=14&iwloc=aa">' + '[Google Mapでみる]' + '</a>');
 
       }else{
         li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
