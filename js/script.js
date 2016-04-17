@@ -117,9 +117,15 @@ function showList(key){
     var li = $('<li class="list-group-item">');
     li.append(laund.name).append('<br>');
     li.append(laund.address).append('<br>');
-    li.append('<a target="_blank" href="' + laund.url + '">' + laund.url +'</a>').append('<br>');
-    li.append(laund.time).append('<br>');
-    li.append(laund.memo);
+    if(laund.url && laund.url.length > 0){
+      li.append('<a target="_blank" href="' + laund.url + '">' + laund.url +'</a>').append('<br>');
+    }
+    if(laund.time && laund.time.length > 0){
+      li.append(laund.time).append('<br>');
+    }
+    if(laund.memo && laund.memo.length > 0){
+      li.append(laund.memo);
+    }
 
 
     $('#laundromat-list').append(li);
