@@ -73,12 +73,14 @@ function parseData(sheetsEntry){ // データを整形して配列で返す
      }else if(dataCol === "5"){
        data[dataRow]['address'] = value;
      }else if(dataCol === "6"){
-       data[dataRow]['ll'] = value;
+       data[dataRow]['lat'] = value;
      }else if(dataCol === "7"){
-       data[dataRow]['url'] = value;
+       data[dataRow]['lng'] = value;
      }else if(dataCol === "8"){
-       data[dataRow]['memo'] = value;
+       data[dataRow]['url'] = value;
      }else if(dataCol === "9"){
+       data[dataRow]['memo'] = value;
+     }else if(dataCol === "10"){
        data[dataRow]['time'] = value;
      }
 
@@ -126,6 +128,22 @@ function showList(key){
     if(laund.memo && laund.memo.length > 0){
       li.append(laund.memo);
     }
+
+    if(laund.address && laund.address.length > 0){
+      // li.append(laund.lat + ',' + laund.lng);
+      // li.append('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=' + laund.name + '&output=embed&t=m&z=16"></iframe>');
+
+      var $mapdiv = $('<div class="ggmap">');
+      var $ggmap = $('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14"></iframe>');
+
+      $mapdiv.append($ggmap);
+
+      li.append($mapdiv);
+
+
+
+    }
+
 
 
     $('#laundromat-list').append(li);
