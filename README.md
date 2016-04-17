@@ -1,1 +1,1 @@
-# kummoto-Laundromat
+# kumamoto-Laundromat
