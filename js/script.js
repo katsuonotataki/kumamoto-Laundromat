@@ -135,6 +135,7 @@ function showList(key){
       li.append(laund.memo);
     }
 
+    // geolocation
     if(laund.address && laund.address.length > 0){
       // li.append(laund.lat + ',' + laund.lng);
       // li.append('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=' + laund.name + '&output=embed&t=m&z=16"></iframe>');
@@ -146,8 +147,12 @@ function showList(key){
 
       // li.append($mapdiv);
       li.append('<br>');
-      li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
+      if(laund.lat && laund.lng){
+        li.append('<a target="_blank" href="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
 
+      }else{
+        li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
+      }
     }
 
 
