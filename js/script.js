@@ -97,9 +97,15 @@ function createSelect(){
   var area_select_form = $("#select_area");
   var select_html = "";
   select_html += '<option value="notselect">地域を選択してください</option>';
+  var selected = localStorage.getItem('selected');
+
   for (var i in laundsIndex) {
     var place = laundsIndex[i];
-    select_html += '<option value="' + place + '"' + '>' + place + "</option>";
+    if(selected && selected === place){
+      select_html += '<option value="' + place + '"' + ' selected>' + place + "</option>";
+    }else{
+      select_html += '<option value="' + place + '"' + '>' + place + "</option>";
+    }
   }
 
   area_select_form.html(select_html);
@@ -163,8 +169,12 @@ function main(){
     }
 
     // show list
-
     showList(value);
+
+    // save
+    localStorage.setItem('selected', value);
+
+
   });
 
 
