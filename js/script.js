@@ -133,14 +133,14 @@ function showList(key){
       // li.append(laund.lat + ',' + laund.lng);
       // li.append('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?ll=' + laund.lat + ',' + laund.lng + '&q=' + laund.name + '&output=embed&t=m&z=16"></iframe>');
 
-      var $mapdiv = $('<div class="ggmap">');
-      var $ggmap = $('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14"></iframe>');
+      // var $mapdiv = $('<div class="ggmap">');
+      // var $ggmap = $('<iframe width="600" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14"></iframe>');
 
-      $mapdiv.append($ggmap);
+      // $mapdiv.append($ggmap);
 
-      li.append($mapdiv);
+      // li.append($mapdiv);
 
-
+      li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '地図を表示' + '</a>');
 
     }
 
