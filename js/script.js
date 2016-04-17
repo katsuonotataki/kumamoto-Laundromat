@@ -65,7 +65,7 @@ function createSelect(){
 
   var area_select_form = $("#select_area");
   var select_html = "";
-  select_html += '<option value="-1">地域を選択してください</option>';
+  select_html += '<option value="notselect">地域を選択してください</option>';
   for (var i in laundsIndex) {
     var place = laundsIndex[i];
     select_html += '<option value="' + place + '"' + '>' + place + "</option>";
@@ -75,10 +75,43 @@ function createSelect(){
   area_select_form.change();
 }
 
+function showList(key){
+
+  var launds = laundMap[key];
+
+  $.each(launds, function(i, laund){
+    // <li class="list-group-item">リスト1</li>
+    // <li class="list-group-item">リスト2</li>
+    // <li class="list-group-item">リスト3</li>
+    var li = $('<li class="list-group-item">');
+    li.append(laund.name).append('<br>');
+    li.append(laund.address).append('<br>');
+    li.append('<a target="_blank" href="' + laund.url + '">' + laund.url +'</a>').append('<br>');
+    li.append(laund.time).append('<br>');
+    li.append(laund.memo);
+
+
+    $('#laundromat-list').append(li);
+
+  });
+
+}
 
 function main(){
 
   loadCsv();
+
+  $('#select_area').on('change', function(){
+    var value = $('#select_area').val();
+    if(value === 'notselect'){
+      return;
+    }
+
+    // show list
+
+    showList(value);
+  });
+
 
 };
 
