@@ -139,8 +139,8 @@ function showList(key){
       // $mapdiv.append($ggmap);
 
       // li.append($mapdiv);
-
-      li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '地図を表示' + '</a>');
+      li.append('<br>');
+      li.append('<a target="_blank" href="http://maps.google.co.jp/maps?q=' + laund.address + '&output=embed&t=m&z=14">' + '[Google Mapでみる]' + '</a>');
 
     }
 
