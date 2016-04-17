@@ -4,8 +4,10 @@ var laundsIndex = [];
 var laundMap = {};
 
 function loadCsv(){
-  var link = 'https://docs.google.com/spreadsheets/d/13r5g12NOF_J-y8qgMJHL3i8-2PJdiU_FuOPcmZDHa4o/pub?output=csv';
+  var link = 'https://docs.google.com/spreadsheets/d/13r5g12NOF_J-y8qgMJHL3i8-2PJdiU_FuOPcmZDHa4o/pub';
   csvToArray(link, function(csv){
+
+
 
     $.each(csv, function(i, row){
       // skip header
@@ -45,7 +47,7 @@ function loadCsv(){
 
 }
 
-function csvToArray(filename, callback) {
+function xcsvToArray(filename, callback) {
   $.get(filename, function(csvdata) {
     csvdata = csvdata.replace(/\r/gm, "");
     var line = csvdata.split("\n"),
@@ -60,6 +62,37 @@ function csvToArray(filename, callback) {
     callback(ret);
   });
 }
+
+function csvToArray(link, callback) {
+  $.ajax({
+    type: 'GET',
+    url: 'https://spreadsheets.google.com/feeds/cells/13r5g12NOF_J-y8qgMJHL3i8-2PJdiU_FuOPcmZDHa4o/od6/public/values?alt=json',
+    dataType: 'jsonp',
+    cache: false,
+    success: function(data){ // 通信が成功した時
+      var sheetsEntry = data.feed.entry; // 実データ部分を取得
+      var rows = catedorizeData(sheetsEntry);
+      callback(rows); // レンダリング用の関数を呼ぶ
+    },
+    error: function(){ // 通信が失敗した時
+      console.log('error');
+    }
+  });
+}
+
+function catedorizeData(sheetsEntry){ // データを整形して配列で返す
+   var categorized = [];
+   for(var i = 0; i < sheetsEntry.length; i++) {
+     var dataCol = sheetsEntry[i].gs$cell.col;
+     var dataRow = sheetsEntry[i].gs$cell.row;
+
+     if(dataCol == 1 && dataRow != sheetsEntry[i+1].gs$cell.row){
+       categorized[categorized.length] = [];
+     }
+     categorized[categorized.length-1].push(sheetsEntry[i]);
+   }
+   return categorized;
+ }
 
 function createSelect(){
 
