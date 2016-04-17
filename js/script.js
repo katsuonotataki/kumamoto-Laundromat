@@ -30,22 +30,6 @@ function loadCsv(){
 
 }
 
-function xcsvToArray(filename, callback) {
-  $.get(filename, function(csvdata) {
-    csvdata = csvdata.replace(/\r/gm, "");
-    var line = csvdata.split("\n"),
-        ret = [];
-    for (var i in line) {
-      //空行はスルーする。
-      if (line[i].length == 0) continue;
-
-      var row = line[i].split(",");
-      ret.push(row);
-    }
-    callback(ret);
-  });
-}
-
 function csvToArray(link, callback) {
   $.ajax({
     type: 'GET',
@@ -121,6 +105,8 @@ function createSelect(){
 }
 
 function showList(key){
+
+  $('#laundromat-list').empty();
 
   var launds = laundMap[key];
 
