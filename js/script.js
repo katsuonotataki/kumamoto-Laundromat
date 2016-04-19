@@ -8,7 +8,9 @@ function loadCsv(){
   csvToArray(link, function(data){
 
     $.each(data, function(key, laund){
-
+      if(!laund.prefecture || !laund.city){
+        return true;
+      }
       laundromats.push(laund);
 
       var key = laund.prefecture + ' - ' + laund.city;
@@ -169,6 +171,17 @@ function main(){
 
   $('#select_area').on('change', function(){
     var value = $('#select_area').val();
+
+    ga(
+        'send',
+        'event',
+        'select_area',
+        'change',
+        value,
+        {'nonInteraction': 1}
+    );
+
+
     if(value === 'notselect'){
       return;
     }
