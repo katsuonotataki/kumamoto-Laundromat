@@ -134,7 +134,7 @@ function createAllMapLink() {
 
         if (!laund.lat || !laund.lng) {
             // console.log(laund);
-            continue;
+            // continue;
         }
 
         var marker = new google.maps.Marker({
