@@ -185,50 +185,52 @@ function createAllMapLink() {
 var currentLat = null;
 var currentLng = null;
 
-function getLocation() {
+function success(position) {
+    // 取得したデータの整理
+    var data = position.coords;
+
+    // データの整理
+    var lat = data.latitude;
+    var lng = data.longitude;
+
+    console.log(lat + ', ' + lng);
+    currentLat = lat;
+    currentLng = lng;
+
+    loadCsv(createAllMapLink);
+};
+
+// [第2引数] 取得に失敗した場合の関数
+function error(error) {
+    var errorInfo = [
+        "位置情報が取得できませんでした。",
+        "位置情報の取得が許可されませんでした。",
+        "位置情報が取得できませんでした。",
+        "位置情報が取得できませんでした。"
+    ];
+
+    // エラー番号
+    var errorNo = error.code;
+
+    // エラーメッセージ
+    var errorMessage = "[エラー番号: " + errorNo + "]\n" + errorInfo[errorNo];
+
+    // アラート表示
+    alert(errorMessage);
+
+    loadCsv(createAllMapLink);
+};
+
+
+function getLocation(callback) {
     if (navigator.geolocation) {
+
         // 現在地を取得
         navigator.geolocation.getCurrentPosition(
 
             // [第1引数] 取得に成功した場合の関数
-            function(position) {
-                // 取得したデータの整理
-                var data = position.coords;
-
-                // データの整理
-                var lat = data.latitude;
-                var lng = data.longitude;
-                // var alt = data.altitude;
-                // var accLatlng = data.accuracy;
-                // var accAlt = data.altitudeAccuracy;
-                // var heading = data.heading; //0=北,90=東,180=南,270=西
-                // var speed = data.speed;
-
-                console.log(lat + ', ' + lng);
-                currentLat = lat;
-                currentLng = lng;
-            },
-
-            // [第2引数] 取得に失敗した場合の関数
-            function(error) {
-                var errorInfo = [
-                    "位置情報が取得できませんでした。",
-                    "位置情報の取得が許可されませんでした。",
-                    "位置情報が取得できませんでした。",
-                    "位置情報が取得できませんでした。"
-                ];
-
-                // エラー番号
-                var errorNo = error.code;
-
-                // エラーメッセージ
-                var errorMessage = "[エラー番号: " + errorNo + "]\n" + errorInfo[errorNo];
-
-                // アラート表示
-                alert(errorMessage);
-
-            },
-
+            success,
+            error,
             // [第3引数] オプション
             {
                 "enableHighAccuracy": false,
@@ -242,20 +244,20 @@ function getLocation() {
     // 対応していない場合
     else {
         // エラーメッセージ
-        var errorMessage = "お使いの端末は、GeoLacation APIに対応していません。";
+        var errorMessage = "お使いの端末では、位置情報の取得ができません。";
 
         // アラート表示
         alert(errorMessage);
 
         // HTMLに書き出し
-        document.getElementById('result').innerHTML = errorMessage;
+        // document.getElementById('result').innerHTML = errorMessage;
     }
 };
 
 function main() {
 
     getLocation();
-    loadCsv(createAllMapLink);
+    // loadCsv(createAllMapLink);
 
 
 
