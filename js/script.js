@@ -97,7 +97,7 @@ function createSelect() {
 
     var area_select_form = $("#select_area");
     var select_html = "";
-    select_html += '<option value="notselect">地域を選択してください</option>';
+    select_html += '<option value="notselect">地区を選択してください</option>';
     var selected = localStorage.getItem('selected');
 
     for (var i in laundsIndex) {
