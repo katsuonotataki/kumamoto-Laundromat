@@ -58,6 +58,10 @@
 
 		ga('create', 'UA-76558567-1', 'auto');
 		ga('send', 'pageview');
+		ga(function(tracker) {
+			var clientId = tracker.get('clientId');
+			ga('set', 'dimension1', clientId);
+		});
 	</script>
 </body>
 
