@@ -60,6 +60,7 @@
 		ga('send', 'pageview');
 		ga(function(tracker) {
 			var clientId = tracker.get('clientId');
+			console.log('clientId: ' + clientId);
 			ga('set', 'dimension1', clientId);
 		});
 	</script>
